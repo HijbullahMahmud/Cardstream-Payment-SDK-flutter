@@ -1,7 +1,8 @@
 name: card_stream_payment_sdk
 description: "CardStream SDK"
 version: 0.0.1
-homepage:
+homepage: https://github.com/HijbullahMahmud/Cardstream-Payment-SDK-flutter
+repository: https://github.com/HijbullahMahmud/Cardstream-Payment-SDK-flutter
 
 environment:
   sdk: '>=3.2.6 <4.0.0'
