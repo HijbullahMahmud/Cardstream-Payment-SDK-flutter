@@ -75,15 +75,6 @@ public class Gateway {
     private final String merchantPwd;
     private final Proxy proxy;
 
-    /**
-     * Configure the Payment Gateway interface.
-     *
-     * @param gatewayUrl     Gateway API Endpoint (Direct or Hosted)
-     * @param merchantID     Merchant Account Id or Alias
-     * @param merchantSecret Secret for above Merchant Account
-     * @param merchantPwd    Password for above Merchant Account
-     * @param proxy          Proxy for connection (if required)
-     */
     public Gateway(
             final String gatewayUrl,
             final String merchantID,
@@ -105,14 +96,7 @@ public class Gateway {
 
     }
 
-    /**
-     * Configure the Payment Gateway interface (no proxy).
-     *
-     * @param gatewayUrl     Gateway Direct API Endpoint
-     * @param merchantID     Merchant Account Id or Alias
-     * @param merchantSecret Secret for above Merchant Account
-     * @param merchantPwd    Password for above Merchant Account
-     */
+
     public Gateway(
             final String gatewayUrl,
             final String merchantID,
@@ -122,43 +106,11 @@ public class Gateway {
         this(gatewayUrl, merchantID, merchantSecret, merchantPwd, Proxy.NO_PROXY);
     }
 
-    /**
-     * Configure the Payment Gateway interface (no password or proxy).
-     *
-     * @param gatewayUrl     Gateway Direct API Endpoint
-     * @param merchantID     Merchant Account Id or Alias
-     * @param merchantSecret Secret for above Merchant Account
-     */
     public Gateway(final String gatewayUrl, final String merchantID, final String merchantSecret) {
         this(gatewayUrl, merchantID, merchantSecret, null);
     }
 
-    /**
-     * Send a request to the gateway and return the verified response.
-     * <br/>
-     * The method will send a request to the Gateway using the HTTP Direct API.
-     * <br/>
-     * The request will use the following Gateway properties unless alternative
-     * values are provided in the request:
-     * + 'directUrl'      - Gateway Direct API Endpoint
-     * + 'merchantID'     - Merchant Account Id or Alias
-     * + 'merchantPwd'    - Merchant Account Password
-     * + 'merchantSecret' - Merchant Account Secret
-     * <br/>
-     * The method will sign the request and also check the signature on any
-     * response.
-     * <br/>
-     * The method will throw an exception if it is unable to send the request
-     * or receive the response.
-     * <br/>
-     * The method does not attempt to validate any request fields.
-     *
-     * @param request request data
-     * @param options options
-     * @return verified response data
-     * @throws IllegalArgumentException invalid request data
-     * @throws IOException              communication failure
-     */
+    
     public Map<String, String> directRequest(
             final Map<String, String> request,
             final Map<String, String> options
@@ -221,42 +173,7 @@ public class Gateway {
         return this.directRequest(request, new TreeMap<String, String>());
     }
 
-    /**
-     * Send request to Gateway using HTTP Hosted API.
-     * <br/>
-     * The method will send a request to the Gateway using the HTTP Hosted API.
-     * <br/>
-     * The request will use the following Gateway properties unless alternative
-     * values are provided in the request:
-     * + 'hostedUrl'      - Gateway Hosted API Endpoint
-     * + 'merchantID'     - Merchant Account Id or Alias
-     * + 'merchantPwd'    - Merchant Account Password
-     * + 'merchantSecret' - Merchant Account Secret
-     * <br/>
-     * The method accepts the following options:
-     * + 'formAttrs'      - HTML form attributes
-     * + 'submitAttrs'    - HTML submit button attributes
-     * + 'submitImage'    - Image to use as the Submit button
-     * + 'submitHtml'     - HTML to show on the Submit button
-     * + 'submitText'     - Text to show on the Submit button
-     * <br/>
-     * 'submitImage', 'submitHtml' and 'submitText' are mutually exclusive
-     * options and will be checked for in that order. If none are provided
-     * the submitText='Pay Now' is assumed.
-     * <br/>
-     * The method will sign the request; partial signing will be used to allow
-     * for submit button images et cetera.
-     * <br/>
-     * The method returns the HTML fragment that needs including in order to
-     * send the request.
-     * <br/>
-     * The method does not attempt to validate any request fields.
-     *
-     * @param request request data
-     * @param options options
-     * @return request HTML form
-     * @throws IllegalArgumentException invalid request data
-     */
+    
     public String hostedRequest(
             final Map<String, String> request,
             final Map<String, String> options
@@ -339,28 +256,7 @@ public class Gateway {
         return this.hostedRequest(request, new TreeMap<String, String>());
     }
 
-    /**
-     * Prepare a request for sending to the Gateway.
-     * <br/>
-     * The method will extract the following configuration properties from the
-     * request if they are present:
-     * + 'merchantSecret' - Merchant Account Secret
-     * <br/>
-     * The method will insert the following configuration properties into
-     * the request if they are not already present:
-     * + 'merchantID'     - Merchant Account Id or Alias
-     * + 'merchantPwd'    - Merchant Account Password (if provided)
-     * <br/>
-     * The method will throw an exception if the request doesn't contain
-     * an 'action' element or a 'merchantID' element (and none could be
-     * inserted).
-     * <br/>
-     * The method does not attempt to validate any request fields.
-     *
-     * @param request request data
-     * @return request data ready for sending
-     * @throws IllegalArgumentException invalid request data
-     */
+    
     public Map<String, String> prepareRequest(
             final Map<String, String> request,
             @SuppressWarnings("unused")
@@ -398,21 +294,7 @@ public class Gateway {
         return this.prepareRequest(request, new TreeMap<String, String>());
     }
 
-    /**
-     * Verify the response from the Gateway.
-     * <br/>
-     * This method will verify that the response is present, contains a
-     * response code and is correctly signed.
-     * <br/>
-     * If the response is invalid then an exception will be thrown.
-     * <br/>
-     * Any signature is removed from the passed response.
-     *
-     * @param response response to verify
-     * @param secret   secret to use in signing
-     * @return verified response data
-     * @throws IllegalArgumentException invalid response data
-     */
+   
     public Map<String, String> verifyResponse(
             final Map<String, String> response,
             String secret
@@ -471,18 +353,6 @@ public class Gateway {
         return this.verifyResponse(response, null);
     }
 
-    /**
-     * Sign the given array of data.
-     * <br/>
-     * This method will return the correct signature for the data array.
-     * <br/>
-     * If the secret is not provided then merchantSecret is used.
-     *
-     * @param data    data to sign
-     * @param secret  secret to use in signing
-     * @param partial partial signing
-     * @return signature
-     */
     public String sign(final Map<String, String> data, String secret, Object partial) {
 
         if (secret == null) {
@@ -543,16 +413,7 @@ public class Gateway {
         return this.sign(data, null);
     }
 
-    /**
-     * Return the field name and value as HTML input tags.
-     * <br/>
-     * The method will return a string containing one or more HTML <code><input
-     * type="hidden"></code> tags which can be used to store the name and value.
-     *
-     * @param name  field name
-     * @param value field value
-     * @return HTML containing <code><INPUT></code> tags
-     */
+    
     @NonNull
     public String fieldToHtml(final String name, final String value) {
 
