@@ -102,7 +102,7 @@ public class MethodChannelHandler extends FlutterActivity implements MethodChann
 
                 // Check if payment was successful or not and call the appropriate callback method
                 if (response != null && response.containsKey("responseCode")) {
-                    callback.onPaymentSuccess(Integer.parseInt(response.get("responseCode")));
+                    callback.onPaymentSuccess(response);
                 } else {
                     callback.onPaymentError("Error processing payment");
                 }
