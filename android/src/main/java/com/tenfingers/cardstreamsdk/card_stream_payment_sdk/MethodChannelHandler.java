@@ -43,7 +43,7 @@ public class MethodChannelHandler extends FlutterActivity implements MethodChann
             makePayment(directURL, merchantID, merchantSecret, amount, cardNumber, cardExpiryDate, cardCVV, customerAddress, customerPostCode, new PaymentCallback() {
                 @Override
                 public void onPaymentSuccess(Map<String, String> response) {
-                    Log.e(TAG, "onPaymentSuccess: "+ response );
+//                    Log.e(TAG, "onPaymentSuccess: "+ response );
                     result.success(response);
                 }
 
@@ -94,7 +94,7 @@ public class MethodChannelHandler extends FlutterActivity implements MethodChann
 
             @Override
             protected void onPostExecute(Map<String, String> response) {
-                Log.d(TAG, "RESPONSE" + response);
+//                Log.d(TAG, "RESPONSE" + response);
                 channel.invokeMethod("show", response);
                 Log.d(TAG, "Method invoked!");
                 Log.d(TAG, "CHANNEL " + channel);

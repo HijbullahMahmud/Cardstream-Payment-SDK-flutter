@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> _payNow() async {
     CardStreamPaymentSdk sdk = CardStreamPaymentSdk();
 
-    Map<String, String> result = await sdk.makePayment(
+    Map<String, dynamic> result = await sdk.makePayment(
         directUrl: "https://gateway.cardstream.com/direct/",
         merchantID: "100001",
         merchantSecret: "Circle4Take40Idea",
@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
 
 //0 = success response
     print("result: ---------------- $result");
+    print("result:xref ---------------- ${result['xref']}");
   }
 
   @override

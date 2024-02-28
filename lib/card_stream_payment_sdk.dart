@@ -16,7 +16,7 @@ class CardStreamPaymentSdk {
     }
   }
 
-  Future<Map<String, String>> makePayment(
+  Future<Map<String, dynamic>> makePayment(
       {required String directUrl,
       required String merchantID,
       required String merchantSecret,
@@ -27,7 +27,7 @@ class CardStreamPaymentSdk {
       required String customerAddress,
       required String customerPostCode}) async {
   //  _channel.setMethodCallHandler(resultHandler);
-    Completer<Map<String, String>> completer = Completer<Map<String, String>>();
+    Completer<Map<String, dynamic>> completer = Completer<Map<String, dynamic>>();
 
     try {
       Map<String, String> arguments = {
