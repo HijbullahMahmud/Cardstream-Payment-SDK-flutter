@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> _payNow() async {
     CardStreamPaymentSdk sdk = CardStreamPaymentSdk();
 
-    Map<String, dynamic> result = await sdk.makePayment(
+    var result = await sdk.makePayment(
         directUrl: "https://gateway.cardstream.com/direct/",
         merchantID: "100001",
         merchantSecret: "Circle4Take40Idea",

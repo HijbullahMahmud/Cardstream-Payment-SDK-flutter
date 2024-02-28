@@ -16,7 +16,7 @@ class CardStreamPaymentSdk {
     }
   }
 
-  Future<Map<String, dynamic>> makePayment(
+  Future<dynamic> makePayment(
       {required String directUrl,
       required String merchantID,
       required String merchantSecret,
@@ -27,7 +27,7 @@ class CardStreamPaymentSdk {
       required String customerAddress,
       required String customerPostCode}) async {
   //  _channel.setMethodCallHandler(resultHandler);
-    Completer<Map<String, dynamic>> completer = Completer<Map<String, dynamic>>();
+    Completer<dynamic> completer = Completer<dynamic>();
 
     try {
       Map<String, String> arguments = {
@@ -45,10 +45,10 @@ class CardStreamPaymentSdk {
       _channel.invokeMethod("pay", arguments).then((value) {
         completer.complete(value);
       }).catchError((error) {
-        completer.completeError(Exception("Error Payment"));
+        completer.completeError(Exception("Error Payment: ${error.toString()}"));
       });
     } catch (e) {
-      completer.completeError(Exception("Error payment"));
+      completer.completeError(Exception("Error payment: ${e.toString()}"));
     }
     return completer.future;
   }
