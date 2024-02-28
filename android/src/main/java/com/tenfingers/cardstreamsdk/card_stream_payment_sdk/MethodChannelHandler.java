@@ -42,9 +42,9 @@ public class MethodChannelHandler extends FlutterActivity implements MethodChann
             String customerPostCode = call.argument("customerPostCode");
             makePayment(directURL, merchantID, merchantSecret, amount, cardNumber, cardExpiryDate, cardCVV, customerAddress, customerPostCode, new PaymentCallback() {
                 @Override
-                public void onPaymentSuccess(int statusCode) {
-                    Log.e(TAG, "onPaymentSuccess: "+ statusCode );
-                    result.success(statusCode);
+                public void onPaymentSuccess(Map<String, String> response) {
+                    Log.e(TAG, "onPaymentSuccess: "+ response );
+                    result.success(response);
                 }
 
                 @Override
